@@ -1,0 +1,36 @@
+{% extends "app/_base.html" %} {% block content %}
+
+<div class="row my-4">
+  <div class="col-md-8">
+    <h2 class="card-title">現在の診療状況</h2>
+    {% for msg in globalstatus %}
+    <div class="card mb-4">
+      <div class="card-body">
+        <p class="card-text">{{ msg.message|truncatechars:200 }}</p>
+        
+        {% if not msg.processedReceptionTime == Null%}
+        <p class="card-text fw-large">ただいま、{{ msg.processedReceptionTime }} に受付された方までお呼びだししています</p>
+        {% endif %}
+      </div>
+      <div class="card-footer text-muted">
+        {{ msg.created|date }} {{ msg.created|time }}更新
+      </div>
+      <a class="stretched-link" href=""></a>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <h5 class="card-header">ご案内</h5>
+      <div class="card-body">
+        <p class="mb-0">
+          イイダ眼科医院の現在の診療状況を表示しています。<br>
+          ご自身の受付時間をご確認の上、お呼び出しに間に合うようにご来院ください。
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
